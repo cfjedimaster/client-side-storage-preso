@@ -1,0 +1,438 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>The Platform Formally Known As Static</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<style>
+		.twocol{
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+		</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>The Platform Formally Known As Static</h1>
+				</section>
+
+				<section>
+					<h2>read.me</h2>
+					<ul>
+						<li>Lead Developer Evangelist for HERE</li>
+						<li>Enterprise Cat Demo Builder</li>
+						<li>Second best "Just Dance 2019" player (in my house)</li>
+						<li>Blogging at www.raymondcamden.com</li>
+						<li>Tweeting @raymondcamden</li>
+					</ul>
+				</section>
+
+				<!-- Photo by Romain Vignes on Unsplash -->
+				<section data-background="img/dictionary.jpg">
+				</section>
+
+				<section>
+					<h2>"Static" Sites</h2>
+					<ul>
+						<li class="fragment">Files and files only</li>
+						<li class="fragment">Web server - yes</li>
+						<li class="fragment">Application (or database) server - no!</li>
+						<li class="fragment">No PHP, ColdFusion, .Net, Perl CGI, Ruby on Rails, Ruby on Tuesdays, and so forth</li>
+					</ul>
+				</section>
+
+				<section data-background="img/spock.jpg"></section>
+				<section data-background="img/car.png"></section>
+				<section data-background="img/db.png"></section>
+
+
+				<section data-background="img/jam.jpg"></section>
+
+				<section>
+					<h2>The JAMStack</h2>
+					<ul>
+						<li class="fragment">Technically the same thing...</li>
+						<li class="fragment">JavaScript, APIs, Markup</li>
+						<li class="fragment"><a href="https://jamstack.org/" target="_new">https://jamstack.org/</a></li>
+						<li class="fragment">So why is this better?</li>
+					</ul>
+				</section>
+	
+				<section>
+					<h3>Working with <strike style="color:#727171">Static Sites</strike><br/>the JAMStack</h3>
+				</section>
+
+				<section>
+					<h2>Static Site Generators (SSG)</h2>
+					<ul>
+						<li class="fragment">They make static sites!</li>
+						<li class="fragment">They give you a dynamic app server locally (typically using template languages like Markdown, Pug, SASS, etc)</li>
+						<li class="fragment">They give you a way to work with data (without a database)</li>
+						<li class="fragment">They output to static</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Options</h2>
+					<ul>
+						<li><a href="https://staticsitegenerators.net/" target="_new">https://staticsitegenerators.net</a></li>
+						<li><a href="https://www.staticgen.com/" target="_new">https://www.staticgen.com</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>For Today</h2>
+					<img src="img/11.png">
+				</section>
+
+				<section>
+					<h2>11ty</h2>
+					<ul>
+						<li><a href="https://www.11ty.io/" target="_new">https://www.11ty.io</a></li>
+						<li>Open Source</li>
+						<li>Node based</li>
+						<li>Template Languages: Nunjucks, Liquid, Handlebars, Mustache, EJS, Haml, 
+					</ul>
+				</section>
+
+				
+				<section>
+					<h2>Installation</h2>
+					<p>
+						<code>npm install -g @11ty/eleventy</code>
+					</p>
+				</section>
+
+				<section>
+					<h2>Commands (Some)</h2>
+					<p class="fragment">
+						<code>eleventy</code>
+					</p>
+					<p class="fragment">
+						<code>eleventy --input=. --output=./_site</code>
+					</p>
+					<p class="fragment">
+						<code>eleventy --serve</code>
+					</p>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+						Show 11ty_one, a single file. Run eleventy to show the output, then eleventy serve. Demonstrate lack
+						of auto reload
+
+						Show 11ty_two, example of Liquid
+					</aside>
+				</section>
+	
+				<section>
+					<h2>Layouts</h2>
+					<ul>
+						<li class="fragment">Specified in front matter (YAML, JSON, JS)</li>
+						<li class="fragment">Loaded from <code>/_includes</code></li>
+						<li class="fragment">Can use any template language</li>
+						<li class="fragment">Can be chained</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Front Matter</h2>
+					<pre><code data-trim data-noescape>
+---
+layout: something
+title: a value
+something: another value
+---
+					</code></pre>
+				</section>
+	
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+						11ty_three - layout. front matter, show title, show link chnaging, show content
+					</aside>
+				</section>
+
+				<section>
+					<h2>Working with Data</h2>
+					<ul>
+						<li class="fragment">A way to define variables for your site</li>
+						<li class="fragment">Front matter</li>
+						<li class="fragment">File-based data (JSON or JS)</li>
+						<li class="fragment">For one other file, for a directory, for a site (global)</li>
+						<li class="fragment">For global data, stored in <code>_data</code></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+						11ty_four - cat demo, 11ty_five, async
+					</aside>
+				</section>
+	
+				<section>
+					<h2>More Crap...</h2>
+					<ul>
+						<li class="fragment">Pagination</li>
+						<li class="fragment">Tags</li>
+						<li class="fragment">Hooks into the Template engine</li>
+						<li class="fragment">Plugins</li>
+					</ul>
+				</section>
+
+				<section data-background="img/jt.jpg" data-background-opacity="0.3">
+					<h2>Bringing Dynamic Back</h2>
+				</section>
+
+				<section>
+					<h2>Dynamic Stuff</h2>
+					<ul>
+						<li class="fragment">Forms</li>
+						<li class="fragment">Comments</li>
+						<li class="fragment">Search</li>
+						<li class="fragment">Etc</li>
+					</ul>
+				</section>
+	
+				<section>
+					<h2>Forms</h2>
+					<ul>
+						<li class="fragment">Wufu</li>
+						<li class="fragment">Google Doc</li>
+						<li class="fragment">FormKeep</li>
+						<li class="fragment">Formspree</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+						javascript cookbook, my blog
+					</aside>
+				</section>
+				
+				<section>
+					
+					<pre><code data-trim>
+
+<form action="//formspree.io/raymondcamden@gmail.com" method="POST" id="contactform">
+  <input type="hidden" name="_next" value="/thankyou" />
+  <input type="hidden" name="_subject" id="_subject" value="Blog Contact Form" />	
+  <input type="text" name="_gotcha" style="display:none" />
+
+  <label for="contact_name">Name: </label>
+  <input type="text" name="name" id="contact_name" required="" /><br />
+
+  <label for="email">Email: </label>
+  <input type="email" name="_replyto" id="email" required="" /><br />
+
+  <label for="contact_comments">Comments: </label><br />
+  <textarea name="comments" id="contact_comments" required=""></textarea>
+
+  <input type="submit" value="Send" id="contactSubmit" />
+
+</form>
+					</code></pre>
+				</section>
+
+				<section>
+					<img src="img/form.png">
+				</section>
+
+				<section>
+					<h2>Comments</h2>
+					<ul>
+						<li class="fragment">Disqus</li>
+						<li class="fragment">Facebook Comments</li>
+						<li class="fragment">None</li>
+						<li class="fragment"><a href="https://darekkay.com/blog/static-site-comments/" target="_new">More examples</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+						javascript cookbook, my blog
+					</aside>
+				</section>
+
+				<section>
+					
+					<pre><code data-trim>
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+<script type="text/javascript">
+	var disqus_shortname = '{{ site.disqus }}';
+	var disqus_developer = 0;
+	(function() {
+	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+						
+					</code></pre>
+				</section>
+				
+				<section>
+					<img src="img/disqus.png">
+				</section>
+
+				<section>
+					<h2>Search</h2>
+					<ul>
+						<li class="fragment"><a href=https://cse.google.com/cse/" target="_new">Google Custom Search Engine</a></li>
+						<li class="fragment"><a href="https://lunrjs.com/" target="_new">Lunr</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+						my blog
+					</aside>
+				</section>
+
+				<section>
+					<h2>More...</h2>
+					<ul>
+						<li class="fragment">Calendars</li>
+						<li class="fragment">E-Commerce</li>
+						<li class="fragment">Any API out there</li>
+						<li class="fragment">Serverless</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Hosting</h2>
+					<ul>
+						<li class="fragment">Traditional Web Server</li>
+						<li class="fragment">PAAS (IBM Bluemix, Azure, etc)</li>
+						<li class="fragment">Amazon S3</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>SSG Focused Hosting</h2>
+					<ul>
+						<li class="fragment">Zeit</li>
+						<li class="fragment">Netlify</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Zeit</h2>
+					<ul>
+						<li class="fragment">Zero Config</li>
+						<li class="fragment">Free (automatic) SSL</li>
+						<li class="fragment">Free (automatic) CDN</li>
+						<li class="fragment">GitHub/GitLab integration</li>
+						<li class="fragment">Serverless</li>
+					</ul>
+				</section>
+
+				<section>
+					<img src="img/zeitprice.png">
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+						demo vue cli
+					</aside>
+				</section>
+
+				<section>
+					<h2>Netlify</h2>
+					<ul>
+						<li class="fragment">Free SSL and CDN</li>
+						<li class="fragment">GitHub/GitLab integration</li>
+						<li class="fragment">Serverless</li>
+						<li class="fragment">Forms</li>
+						<li class="fragment">Identity</li>
+						<li class="fragment">Analytics</li>
+						<li class="fragment">Gold Standard</li>
+					</ul>
+				</section>
+
+				<section>
+					<img src="img/netlify.png">
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+						codebreaker, both serverless func and build script
+					</aside>
+				</section>
+
+				<section>
+					<h2>Wrap Up</h2>
+					<ul>
+						<li><a href="https://jamstack.org/resources/" target="_new">https://jamstack.org/resources/</a></li>
+						<li><a href="https://jamstack.org/slack" target="_new">https://jamstack.org/slack</a></li>
+						<li><a href="https://jamstack.org/community/" target="_new">https://jamstack.org/community/</a></li>
+						<li><a href="https://github.com/BolajiAyodeji/awesome-jamstack" target="_new">https://github.com/BolajiAyodeji/awesome-jamstack</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<a href="https://www.amazon.com/gp/product/B06XHGH789/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B06XHGH789&linkCode=as2&tag=raymondcamd06-20&linkId=f23f73d89dfe77d76a37e967d7e28cd0" target="_new"><img src="img/book.jpg"></a>
+				</section>
+
+				<section>
+					<h2>Thank You!</h2>
+					<div class="twocol">
+						<ul>
+							<li>raymondcamden.com</li>
+							<li>@raymondcamden</li>
+						</ul>
+						<img src="img/ray.jpg" style="float:right">
+					</div>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				hash:true,
+				slideNumber:true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
