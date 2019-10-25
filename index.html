@@ -114,10 +114,74 @@
 				</section>
 
 				<section>
+					<h2>Cookies - How Many?</h2>
+					<ul>
+						<li>According to the <a href="http://www.ietf.org/rfc/rfc2109.txt">spec:</a> (Feb 1997)</li>
+						<li>At least 300 cookies (per browser)</li>
+						<li>At least 4096 bytes per cookie</li>
+						<li>At least 20 per unique host</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Firefox</h2>
+					<img src="img/ffcookie.png">
+				</section>
+
+				<section>
 					<h2>Cookies - Possible Uses?</h2>
 					<ul>
 						<li class="fragment">Authentication/Authorization</li>
 						<li class="fragment">Preferences that the server needs to know</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Cookies - Code Sample</h2>
+					<pre><code>
+console.log(document.cookie); // show all cookies in an encoded string
+document.cookie = "newOne=newValue"; // sets ONE cookie
+					</code></pre>
+				</section>
+	
+				<section>
+					<h2>Cookies - Demo</h2>
+					<img src="img/cookiemonster.gif">
+				</section>
+
+				<section>
+					<h2>Cookies - Libraries</h2>
+					<ul>
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework">MDN "Simple cookie framework"</a></li>
+						<li><a href="https://www.npmjs.com/package/vue-cookies">vue-cookies</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Web Storage</h2>
+					<ul>
+						<li class="fragment">AKA LocalStorage</li>
+						<li class="fragment">Key/value storage</li>
+						<li class="fragment">Simple values (JSON FTW)</li>
+						<li class="fragment">Session version (ends when you close the tab)</li>
+						<li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API">MDN Docs</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Web Storage - Possible Uses?</h2>
+					<ul>
+						<li class="fragment">Preferences your server doesn't need to know</li>
+						<li class="fragment">Search history</li>
+						<li class="fragment">"Favorited" content items</li>
+						<li class="fragment">Form data</li>
+					</ul>
+				</section>
+			
+				<section>
+					<h2>Web Storage - How Much?</h2>
+					<ul>
+						<li class="fragment">Firefox - 10 megs per domain</li>
 					</ul>
 				</section>
 

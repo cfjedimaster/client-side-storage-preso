@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	/*
+$(document).ready(function () {
+
+	console.log("What cookies do I have now?");
+	console.log(document.cookie);
+
+	$("#testButton").on("click", function() {
+		//count cookies
+		document.cookie="newcookie"+(cookiecount+(Math.floor(Math.random()*10000)))+"=foo";
+		console.log("You now have "+(cookiecount+1)+" cookies.");
+	});
+
+});
+*/
+</script>
+</head>
+
+<body>
+
+	<div id="app">
+		You currently have {{ cookieCount}} cookies.<br/>
+		Raw cookie string:<br/>
+		<pre>{{ cookieString }}</pre><br/>
+
+		<button @click="addCookie">Add Cookie</button>
+	</div>
+
+<script>
+const app = new Vue({
+	el:'#app',
+	data: {
+		cookieCount:'',
+		cookieString:''
+	},
+	created() {
+		this.showCookies();
+	},
+	methods: {
+		addCookie() {
+			document.cookie="newcookie"+(this.cookieCount+(Math.floor(Math.random()*10000)))+"=foo";
+			this.showCookies();
+		},
+		showCookies() {
+			this.cookieString = document.cookie;
+			this.cookieCount = this.cookieString.split(';').length;
+		}
+	}
+});
+</script>
+
+</body>
+</html>
