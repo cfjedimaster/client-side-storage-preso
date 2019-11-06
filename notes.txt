@@ -3,3 +3,8 @@ Stuff for later:
 https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria
 
 https://twitter.com/raymondcamden/status/1187832101158215680
+
+At the end, mention new FS api from chrome
+mention websql 
+
+https://developers.google.com/web/updates/2016/06/persistent-storage

@@ -277,6 +277,221 @@ window.addEventListener('storage', () => {
 				</section>
 
 				<section>
+					<h2>IndexedDB</h2>
+					<ul>
+						<li class="fragment">Not IndexDB</li>
+						<li class="fragment">Storage for "significant amounts of structured data" (source: MDN)</li>
+						<li class="fragment">NoSQL (Kinda)</li>
+						<li class="fragment">Asynchronous + Transaction API</li>
+						<li class="fragment">Not easy or simple</li>
+						<li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">MDN Docs</a>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>IndexedDB - How much?</h2>
+					<p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria">Firefox details</a>
+					</p>
+
+					<blockquote>
+						The maximum browser storage space is dynamic — it is based on your hard drive size. The global limit is calculated as
+						50% of free disk space. In Firefox, an internal browser tool called the Quota Manager keeps track of how much disk space
+						each origin is using up, and deletes data if necessary.
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Index what?</h2>
+					<ul>
+						<li class="fragment">Getting values can be done by key (think primary key)</li>
+						<li class="fragment">You can make an index on (most) any property</li>
+						<li class="fragment">And by range on an index (think names)</li>
+						<li class="fragment">Outside of indexes, no "search"</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Key Terms</h2>
+					<ul>
+						<li class="fragment">database</li>
+						<li class="fragment">object store</li>
+						<li class="fragment">index</li>
+						<li class="fragment">key</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Getting Started</h2>
+					<ul>
+						<li class="fragment">Open a database, passing a name and version</li>
+						<li class="fragment">Listen for an event that signifies first hit/version change</li>
+						<li class="fragment">Define your object stores</li>
+						<li class="fragment">Listen for an event that everything is done</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Code Sample</h2>
+					<pre><code class="javascript">
+let db;
+let openRequest = indexedDB.open("mydb", 1);
+openRequest.onupgradeneeded = e => {
+  let thisDb = e.target.result;
+  let store = thisDb.createObjectStore("data", { autoIncrement:true, keyPath: "id" });
+  store.createIndex("name", "name", { unique: false });
+};
+
+openRequest.onsuccess = e => {
+  db = e.target.results;
+  //do stuff
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>IndexedDB - CUD</h2>
+					<ul>
+						<li class="fragment">Open a transaction (readwrite)</li>
+						<li class="fragment">Open an object store</li>
+						<li class="fragment">Perform your operation (CUD)</li>
+						<li class="fragment">Add event handlers for error, result</li>
+						<li class="fragment">Events for both the request and the transaction</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Code Sample</h2>
+					<pre><code class="javascript">
+// https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
+var transaction = db.transaction(["customers"], "readwrite");
+
+// Do something when all the data is added to the database.
+transaction.oncomplete = function(event) {
+  console.log("All done!");
+};
+
+transaction.onerror = function(event) {
+  // Don't forget to handle errors!
+};
+
+var objectStore = transaction.objectStore("customers");
+var customer = { 
+  "name":"Frylock", 
+  "phone":"555-555-5555" 
+};
+
+var request = objectStore.add(customer);
+request.onsuccess = function(event) {
+  // do something here maybe?
+});
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Reading</h2>
+					<ul>
+						<li class="fragment">Open a transaction (read)</li>
+						<li class="fragment">Open an object store</li>
+						<li class="fragment">Open a cursor</li>
+						<li class="fragment">Add event handlers for success</li>
+						<li class="fragment">Iterate</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Code Sample</h2>
+					<pre><code class="javascript">
+// https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
+var objectStore = 
+  db.transaction("customers").objectStore("customers");
+
+objectStore.openCursor().onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    // cursor.key is the PK
+    console.log("Name is " + cursor.value.name);
+    cursor.continue();
+  }
+  else {
+    console.log("No more entries!");
+  }
+};			
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Index Reading</h2>
+					<ul>
+						<li class="fragment">Open a transaction (read)</li>
+						<li class="fragment">Open an object store</li>
+						<li class="fragment">Open an index</li>
+						<li class="fragment">Optionally create a "range" ("A" to "Z")</li>
+						<li class="fragment">Open a cursor</li>
+						<li class="fragment">Iterate</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Code Sample</h2>
+					<pre><code class="javascript">
+// https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
+var idx = 
+	db.transaction("customers")
+	.objectStore("customers")
+	.index("name");
+
+// Match anything between "Bill" and "Donna", but not including "Donna"
+// variations, upperBound and lowerBound
+var boundKeyRange = IDBKeyRange.bound("Bill", "Donna", false, true);
+
+idx.openCursor(boundKeyRange).onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    // cursor.key is the PK
+    console.log("Name is " + cursor.value.name);
+    cursor.continue();
+  }
+  else {
+    console.log("No more entries!");
+  }
+};			
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Demo (Maybe)</h2>
+					<ul>
+						<li><a href="https://idb.raymondcamden.now.sh/" target="_new">My Vue/IDB demo</a></li>
+						<li><a href="https://github.com/cfjedimaster/vue-demos/tree/master/idb" target="_new">Code for above</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>IndexedDB - More</h2>
+					<ul>
+						<li>You can delete a database</li>
+						<li>You can delete an object store</li>
+						<li>You can check if an object store exists</li>
+						<li>You can getAll on an object store (expensive!)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Libraries</h2>
+					<ul>
+						<li><a href="https://dexie.org/">Dexie.js</a></li>
+						<li><a href="https://github.com/jakearchibald/idb">idb</a></li>
+						<li><a href="https://github.com/localForage/localForage">localForage</a></li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>WebStorage - Devtools</h2>
+				</section>
+
+				<section>
 					<h2>Thank You!</h2>
 					<div class="twocol">
 						<ul>
