@@ -83,8 +83,9 @@
 					<h2>The Game Plan</h2>
 					<ul>
 						<li class="fragment">Talk about the options</li>
-						<li class="fragment">How to use them and where to use them</li>
+						<li class="fragment">How to use them</li>
 						<li class="fragment">Going to show you some demos</li>
+						<li class="fragment">Where to use them</li>
 						<li class="fragment">Devtools support</li>
 						<li class="fragment"><strike>Show you the support matrix</strike></li>
 					</ul>
@@ -145,16 +146,8 @@
 				</section>
 
 				<section>
-					<h2>Cookies - Possible Uses?</h2>
-					<ul>
-						<li class="fragment">Authentication/Authorization</li>
-						<li class="fragment">Preferences that the server needs to know</li>
-					</ul>
-				</section>
-
-				<section>
 					<h2>Cookies - Code Sample</h2>
-					<pre><code>
+					<pre><code class="javascript">
 console.log(document.cookie); // show all cookies in an encoded string
 document.cookie = "newOne=newValue"; // sets ONE cookie
 					</code></pre>
@@ -163,6 +156,14 @@ document.cookie = "newOne=newValue"; // sets ONE cookie
 				<section>
 					<h2>Cookies - Demo</h2>
 					<img src="img/cookiemonster.gif">
+				</section>
+
+				<section>
+					<h2>Cookies - Possible Uses?</h2>
+					<ul>
+						<li class="fragment">Authentication/Authorization</li>
+						<li class="fragment">Preferences that the server needs to know</li>
+					</ul>
 				</section>
 
 				<section>
@@ -189,6 +190,65 @@ document.cookie = "newOne=newValue"; // sets ONE cookie
 				</section>
 
 				<section>
+					<h2>Web Storage - How Much?</h2>
+					<img src="img/ffs.png">
+				</section>
+
+				<section>
+					<h2>WebStorage - Code Sample</h2>
+					<pre><code class="javascript">
+//Setting values
+localStorage.name = "Raymond Camden";
+localStorage["name"] = "Raymond Camden";
+localStorage.setItem("name", "Raymond Camden");
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>WebStorage - Code Sample</h2>
+					<pre><code class="javascript">
+//Setting values
+sessionStorage.name = "Raymond Camden";
+sessionStorage["name"] = "Raymond Camden";
+sessionStorage.setItem("name", "Raymond Camden");
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>WebStorage - Code Sample</h2>
+					<pre><code class="javascript">
+//Getting values
+name = localStorage.name;
+name = localStorage["name"];
+name = localStorage.getItem("name");
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>WebStorage - Code Sample</h2>
+					<pre><code class="javascript">
+//misc stuff
+localStorage.length; // how many keys
+localStorage.clear(); // remove everything
+localStorage.key(N); // return the Nth item, don't use it
+localStorage.removeItem(name); // removes an item
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>WebStorage - Code Sample</h2>
+					<pre><code class="javascript">
+//misc stuff
+//ex from: https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
+window.addEventListener('storage', () => {
+	// When local storage changes, dump the list to
+	// the console.
+	console.log(window.localStorage.getItem('name'));
+});
+					</code></pre>
+				</section>
+
+				<section>
 					<h2>Web Storage - Possible Uses?</h2>
 					<ul>
 						<li class="fragment">Preferences your server doesn't need to know</li>
@@ -197,10 +257,23 @@ document.cookie = "newOne=newValue"; // sets ONE cookie
 						<li class="fragment">Form data</li>
 					</ul>
 				</section>
-			
+				
+
 				<section>
-					<h2>Web Storage - How Much?</h2>
-					<img src="img/ffs.png">
+					<h2>WebStorage - Demo</h2>
+					<img src="img/storage.jpg">
+				</section>
+
+				<section>
+					<h2>WebStorage - Libraries</h2>
+					<ul>
+						<li><a href="https://github.com/tsironis/lockr">Lockr</a></li>
+						<li><a href="https://www.sitepoint.com/9-javascript-libraries-working-with-local-storage/">More options...</a></li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>WebStorage - Devtools</h2>
 				</section>
 
 				<section>
