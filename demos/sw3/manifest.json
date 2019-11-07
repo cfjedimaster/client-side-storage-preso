@@ -1,0 +1,13 @@
+{
+	"short_name":"SW3 Test",
+	"name":"SW3 Test for Raymond Camden",
+	"icons":[
+		{
+			"src":"images/icons/cat192.png",
+			"type":"image/png",
+			"sizes":"192x192"
+		}
+	],
+	"start_url":"./index.html?utm_source=homescreen",
+	"display":"standalone"
+}
