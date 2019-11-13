@@ -404,6 +404,27 @@ request.onsuccess = function(event) {
 					<h2>IndexedDB - Code Sample</h2>
 					<pre><code class="javascript">
 // https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
+let objectStore = 
+  db.transaction("customers").objectStore("customers");
+
+let request = objectStore.get(1);
+
+request.onsuccess = e => {
+	//this is my data!
+	data = e.result;
+};
+
+request.onerror = e => {
+	console.log('handle the error...');
+
+};
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>IndexedDB - Code Sample</h2>
+					<pre><code class="javascript">
+// https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
 var objectStore = 
   db.transaction("customers").objectStore("customers");
 
